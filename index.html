@@ -125,7 +125,7 @@
 <body>
 <div id="mainID" class="title">
 <h4>
-  Test - Visualizing the Spread of COVID-19 in South Carolina
+  Visualizing the Spread of COVID-19 in South Carolina
 </h4>
 <p>
   Hover over bubbles to see details
@@ -160,7 +160,7 @@ let sc_projection = d3.geoAlbers()
 let path = d3.geoPath()
     .projection(sc_projection);
 
-let tooltip = d3.select("div").append("div")	
+let tooltip = d3.select(".title").append("div")	
     .attr("class", "tooltip")				
     .style("opacity", 0);
 console.log("Tooltip Main: " + tooltip);
@@ -326,9 +326,7 @@ function fill_initial_data(){
 		return 1;
 	  })
 	.on("mouseover", function(d) {
-        if (+(d.value[0]) >= 1) return;		
-		console.log("Mousing over green county");
-		console.log("Tooltip: " + tooltip);
+        if (+(d.value[0]) >= 1) return;
 	    let firstS = "";
 		let secondS = "";
 		if (d.value[0] != 1) firstS = "s";
@@ -367,9 +365,7 @@ function fill_initial_data(){
   countyLocations.append("circle")
 	.attr("class", "case-boundary")
 	.attr("r", function(d) { return radius(+(d.value[0])); })
-	.on("mouseover", function(d) {	
-	    console.log("Mousing over bubble");
-		console.log("Tooltip: " + tooltip);
+	.on("mouseover", function(d) {
 	    let firstS = "";
 		let secondS = "";
 		if (d.value[0] != 1) firstS = "s";
