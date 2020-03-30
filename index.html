@@ -140,56 +140,56 @@
   </p>
 </div>
 <script>
-var width = 420,
+const width = 420,
     height = 360;
 
-var maxRadius = 28;
-var maxData = 100;
+const maxRadius = 28,
+	maxData = 100;
 
-var svg = d3.select("div").append("svg")
+let svg = d3.select("div").append("svg")
     .attr("width", width)
 	.attr("id", "SVGMain")
     .attr("height", height);
 
-var sc_projection = d3.geoAlbers()
+let sc_projection = d3.geoAlbers()
   .parallels([32 + 30 / 60, 34 + 50 / 60])
   .rotate([81, 0])
     .scale(6000)
     .translate([155, -340]);
 
-var path = d3.geoPath()
+let path = d3.geoPath()
     .projection(sc_projection);
 
-var tooltip = d3.select("div").append("div")	
+let tooltip = d3.select("div").append("div")	
     .attr("class", "tooltip")				
     .style("opacity", 0);
 
-var radius;
+let radius;
 
-var playButton;
-var stopButton;
+let playButton;
+let stopButton;
 
-var sizeLegend;
-var colorLegend;
-var timeLegend;
+let sizeLegend;
+let colorLegend;
+let timeLegend;
 
-var virusData;
-var deathData;
-var centroids = {};
-var totalData = {};
+let virusData;
+let deathData;
+let centroids = {};
+let totalData = {};
 
-var dateOptions = {'month': 'long', 'day': 'numeric'};
-var dataLoaded = false;
-var currentDay = 0;
-var timerID = -1;
-var isPlaying = false;
+let dateOptions = {'month': 'long', 'day': 'numeric'};
+let dataLoaded = false;
+let currentDay = 0;
+let timerID = -1;
+let isPlaying = false;
 
 function getDate(day){
   return new Date(2020, 2, 6 + day);
 }
 
 function drawButtons(){
-  var buttonGroup = svg.append("g")
+  let buttonGroup = svg.append("g")
 	.attr("transform", "translate(" + (width - 50) + "," + (height - 20 - (2*maxRadius + 10)) + ")")
     .attr("class", "button");
   
@@ -222,8 +222,8 @@ function drawButtons(){
 }
 
 function drawLegend(){
-	var d1 = maxData/2;
-	var d2 = maxData/4;
+	let d1 = maxData/2;
+	let d2 = maxData/4;
 	sizeLegend = svg.append("g")
 		.attr("class", "sizeLegend")
 		.attr("transform", "translate(" + 60 + "," + (height - 20) + ")")
@@ -278,7 +278,7 @@ function drawLegend(){
 function load_initial_data(){
   maxData = 0;
   for (day in virusData.columns){
-    var dayData = {};
+    let dayData = {};
 	for (county in virusData[day]){
 	  dayData[county] = [virusData[day][county], deathData[day][county]];
 	  maxData = Math.max(maxData, virusData[day][county]);
@@ -317,7 +317,7 @@ function inputInitialData(){
 }
 
 function fill_initial_data(){
-  var dVList = d3.entries(totalData[0]);
+  let dVList = d3.entries(totalData[0]);
   svg.selectAll("path.county-fill")
       .data(dVList)
 	  .style("fill-opacity", function (d) { 
@@ -326,11 +326,11 @@ function fill_initial_data(){
 	  })
 	.on("mouseover", function(d) {
         if (+(d.value[0]) >= 1) return;		
-	    var firstS = "";
-		var secondS = "";
+	    let firstS = "";
+		let secondS = "";
 		if (d.value[0] != 1) firstS = "s";
 		if (d.value[1] != 1) secondS = "s";
-        var tooltipText = "<bold>" + d.key + "</bold>" + "<br/>"  + (+d.value[0]) + " case" + firstS + "<br/>" + (+d.value[1]) + " death" + secondS;
+        let tooltipText = "<bold>" + d.key + "</bold>" + "<br/>"  + (+d.value[0]) + " case" + firstS + "<br/>" + (+d.value[1]) + " death" + secondS;
 		tooltip.transition()		
 			.duration(200)		
 			.style("opacity", .9);		
@@ -342,7 +342,7 @@ function fill_initial_data(){
 		tooltip.transition()		
 			.duration(500)		
 			.style("opacity", 0);});
-  var countyLocations = svg.append("g")
+  let countyLocations = svg.append("g")
     .attr("class", "bubble-container")
     .selectAll(".county-centroid")
 	.data(dVList)
@@ -365,11 +365,11 @@ function fill_initial_data(){
 	.attr("class", "case-boundary")
 	.attr("r", function(d) { return radius(+(d.value[0])); })
 	.on("mouseover", function(d) {	
-	    var firstS = "";
-		var secondS = "";
+	    let firstS = "";
+		let secondS = "";
 		if (d.value[0] != 1) firstS = "s";
 		if (d.value[1] != 1) secondS = "s";
-        var tooltipText = "<bold>" + d.key + "</bold>" + "<br/>"  + (+d.value[0]) + " case" + firstS + "<br/>" + (+d.value[1]) + " death" + secondS;
+        let tooltipText = "<bold>" + d.key + "</bold>" + "<br/>"  + (+d.value[0]) + " case" + firstS + "<br/>" + (+d.value[1]) + " death" + secondS;
 		tooltip.transition()		
 			.duration(200)		
 			.style("opacity", .9);		
@@ -413,14 +413,14 @@ function transitionToDay(day){
     stopAnimation();
   }
   
-  var dVList = d3.entries(totalData[day]);
+  let dVList = d3.entries(totalData[day]);
   
-  var countyLocations = svg.select(".bubble-container")
+  let countyLocations = svg.select(".bubble-container")
     .selectAll(".county-centroid")
 	.data(dVList);
-  var cases = countyLocations.select("circle.case");
-  var deaths = countyLocations.select("circle.death");
-  var boundaries = countyLocations.select("circle.case-boundary");
+  let cases = countyLocations.select("circle.case");
+  let deaths = countyLocations.select("circle.death");
+  let boundaries = countyLocations.select("circle.case-boundary");
   
   
   svg.select(".timeLegend")
@@ -446,8 +446,8 @@ function transitionToDay(day){
 	  })
   }
   else {
-	var transitionEase = d3.easeLinear
-	var duration = 600;
+	let transitionEase = d3.easeLinear
+	let duration = 600;
 	cases.transition()
 	  .duration(duration)
 	  .ease(transitionEase)
@@ -477,7 +477,7 @@ function transitionToDay(day){
 
 d3.json("states.json")
     .then(function(sc) {
-		var state = topojson.feature(sc, sc.objects.places);
+		let state = topojson.feature(sc, sc.objects.places);
 
 		svg.append("path")
 		  .datum(state)
@@ -487,7 +487,7 @@ d3.json("states.json")
 
 d3.json("counties.json")
 	.then(function(counties) {
-		var features = topojson.feature(counties, counties.objects.places).features;
+		let features = topojson.feature(counties, counties.objects.places).features;
 		countyObjects = features;
 		svg.append('g')
 		  .selectAll("path.county-fill")
@@ -509,8 +509,8 @@ d3.json("counties.json")
 		.datum(topojson.mesh(counties, counties.objects.places, function(a, b) { return a === b; }))
 		.attr("d", path)
 		.attr("class", "county-boundary IRL");
-		for (var i = 0; i < features.length; i++){
-		var centroid = path.centroid(features[i]);
+		for (let i = 0; i < features.length; i++){
+		let centroid = path.centroid(features[i]);
 		if (features[i].properties.NAME == "Charleston"){
 		  centroid = [centroid[0] - 15, centroid[1] + 12];
 		}
