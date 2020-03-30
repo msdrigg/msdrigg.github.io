@@ -386,7 +386,7 @@ function fill_initial_data(){
 function playAnimation(){
   if (isPlaying) return;
   isPlaying = true;
-  if (currentDay == Object.keys(virusData).length - 1){
+  if (currentDay >= Object.keys(virusData).length - 2){
     currentDay = 0;
     transitionToDay(currentDay);
   }
@@ -404,12 +404,12 @@ function stopAnimation(){
 }
 
 function updateForNextDay() { 
-  currentDay = (currentDay + 1)%Object.keys(totalData).length;
+  currentDay = (currentDay + 1)%(Object.keys(totalData).length - 2);
   transitionToDay(currentDay);
 }
 
 function transitionToDay(day){
-  if (day == Object.keys(virusData).length - 2){
+  if (day >= Object.keys(virusData).length - 2){
     stopAnimation();
   }
   
