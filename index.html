@@ -125,7 +125,7 @@
 <body>
 <div id="mainID" class="title">
 <h4>
-  Visualizing the Spread of COVID-19 in South Carolina
+  Test - Visualizing the Spread of COVID-19 in South Carolina
 </h4>
 <p>
   Hover over bubbles to see details
@@ -325,7 +325,9 @@ function fill_initial_data(){
 		return 1;
 	  })
 	.on("mouseover", function(d) {
+	    console.log("Mousing over county");
         if (+(d.value[0]) >= 1) return;		
+		console.log("Mousing over green county");
 	    let firstS = "";
 		let secondS = "";
 		if (d.value[0] != 1) firstS = "s";
@@ -338,7 +340,8 @@ function fill_initial_data(){
 			.style("left", (d3.event.pageX) + "px")		
 			.style("top", (d3.event.pageY - 28) + "px");	
 		})					
-	.on("mouseout", function(d) {		
+	.on("mouseout", function(d) {	
+        console.log("Done mousing over county");	
 		tooltip.transition()		
 			.duration(500)		
 			.style("opacity", 0);});
@@ -365,6 +368,7 @@ function fill_initial_data(){
 	.attr("class", "case-boundary")
 	.attr("r", function(d) { return radius(+(d.value[0])); })
 	.on("mouseover", function(d) {	
+	    console.log("Mousing over bubble");
 	    let firstS = "";
 		let secondS = "";
 		if (d.value[0] != 1) firstS = "s";
