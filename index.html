@@ -163,6 +163,7 @@ let path = d3.geoPath()
 let tooltip = d3.select("div").append("div")	
     .attr("class", "tooltip")				
     .style("opacity", 0);
+console.log("Tooltip Main: " + tooltip);
 
 let radius;
 
@@ -325,9 +326,9 @@ function fill_initial_data(){
 		return 1;
 	  })
 	.on("mouseover", function(d) {
-	    console.log("Mousing over county");
         if (+(d.value[0]) >= 1) return;		
 		console.log("Mousing over green county");
+		console.log("Tooltip: " + tooltip);
 	    let firstS = "";
 		let secondS = "";
 		if (d.value[0] != 1) firstS = "s";
@@ -340,8 +341,7 @@ function fill_initial_data(){
 			.style("left", (d3.event.pageX) + "px")		
 			.style("top", (d3.event.pageY - 28) + "px");	
 		})					
-	.on("mouseout", function(d) {	
-        console.log("Done mousing over county");	
+	.on("mouseout", function(d) {
 		tooltip.transition()		
 			.duration(500)		
 			.style("opacity", 0);});
@@ -369,6 +369,7 @@ function fill_initial_data(){
 	.attr("r", function(d) { return radius(+(d.value[0])); })
 	.on("mouseover", function(d) {	
 	    console.log("Mousing over bubble");
+		console.log("Tooltip: " + tooltip);
 	    let firstS = "";
 		let secondS = "";
 		if (d.value[0] != 1) firstS = "s";
