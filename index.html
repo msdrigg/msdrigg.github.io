@@ -279,6 +279,9 @@ function load_initial_data(){
   maxData = 0;
   for (day in virusData.columns){
     let dayData = {};
+	console.log("New data");
+	console.log(virusData);
+	console.log(deathData);
 	for (county in virusData[day]){
 	  dayData[county] = [virusData[day][county], deathData[day][county]];
 	  maxData = Math.max(maxData, virusData[day][county]);
