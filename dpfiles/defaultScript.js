@@ -38,7 +38,7 @@ let constants2 = JSON.parse(JSON.stringify(constants1));
 constants2.location = "#demoVanilla";
 constants2.pendulumNumber = 60;
 constants2.explain = false;
-constants2.phi1Init = 1.5;
+constants2.phi1Init = 1.6;
 constants2.phi2Init = 2.8;
 constants2.deviation = 0.0005;
 constants2.colorscale = goodColorScales[1];
@@ -123,8 +123,8 @@ class Slider {
 		slider.oninput = (d)=>{
 			textHolder.innerHTML = this.name + ": " + '<span style="font-weight: bold">' +  d.target.value + "</span>";
 			demo4[this.parameter + "_"] = d.target.valueAsNumber;
+			demo4.restart.bind(demo4);
 		};
-		slider.onmouseup = demo4.restart.bind(demo4);
 		fullDiv.appendChild(slider);
 		fullDiv.appendChild(textHolder);
 		container.append(fullDiv);
@@ -137,7 +137,7 @@ let slidersConsts = [["Pendulum Number", "pendulumNumber", 1, 200, true, 50],
 	["Rod 2 Length", "l2", 3, 10, false, 5],
 	["Mass 1", "m1", 1, 10, false, 5],
 	["Mass 2", "m2", 1, 10, false, 5],
-	["Phi 1 Initial", "phi1Init", 0, 2*Math.PI, false, 1.5],
+	["Phi 1 Initial", "phi1Init", 0, 2*Math.PI, false, 1.6],
 	["Phi 2 Initial", "phi2Init", 0, 2*Math.PI, false, 2.8]];
 
 slidersConsts.forEach((item, i)=>{
