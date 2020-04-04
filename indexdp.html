@@ -73,7 +73,14 @@
 			float: top;
 		}
 		.demoCaption {
+			-webkit-touch-callout: none;
+			-webkit-user-select: none;
+			-khtml-user-select: none;
+			-moz-user-select: none;
+			-ms-user-select: none;
 			user-select: none;
+			font-style: italic;
+			margin-bottom: 30px;
 		}
 		.centeredWrapper {
 			text-align: center;
@@ -83,11 +90,6 @@
 			max-width: 500px;
 			width: 100%;
 			height: auto;
-		}
-		.demoCaption {
-			user-select: none;
-			font-style: italic;
-			margin-bottom: 30px;
 		}
 		.mainContent {
 			max-width: 700px;
@@ -213,7 +215,7 @@
 <p class="text-explanation">
 	In this final demo, we can observer how difficult these problems are to solve even with the assistance of a computer. 
 	To process these simulations fast enough on a normal computer for you to see them, the solution loses much accuracy. This loss can be seen by making rod 
-	lengths significantly different. When one rod is much longer than the other, the errors become significant enough to notice 
+	lengths or masses significantly different. When one rod is much longer than the other, the errors become significant enough to notice 
 	with the naked eye. You can see the second pendulum dragging behind or lunging forward unnaturally.
 </p>
 <p class="text-explanation">
