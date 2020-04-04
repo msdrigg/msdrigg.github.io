@@ -39,7 +39,7 @@ constants2.location = "#demoVanilla";
 constants2.pendulumNumber = 60;
 constants2.explain = false;
 constants2.phi1Init = 1.5;
-constants2.phi2Init = 2.7;
+constants2.phi2Init = 2.8;
 constants2.deviation = 0.0005;
 constants2.colorscale = goodColorScales[1];
 constants2.caption = "60 pendulums 0.03 degrees apart initially";
@@ -73,12 +73,18 @@ demos.forEach((demo)=>{
 	}
 	else {
 		demoLocation.onclick = function (){
-			demos.forEach ((demo) => {
-				if (demo.continueLooping) {
-					demo.stop.bind(demo)();
-				}
-			});
-			demo.start.bind(demo)();
+			if (demo.continueLooping) {
+				demo.stop.bind(demo)();
+			}
+			else {
+				demos.forEach ((demo) => {
+					if (demo.continueLooping) {
+						demo.stop.bind(demo)();
+					}
+				});
+				
+				demo.start.bind(demo)();
+			}
 		};
 		demoLocation.ondblclick = demo.restart.bind(demo);
 	}
