@@ -138,7 +138,7 @@ let slidersConsts = [["Pendulum Number", "pendulumNumber", 1, 200, true, 50],
 	["Mass 1", "m1", 1, 10, false, 5],
 	["Mass 2", "m2", 1, 10, false, 5],
 	["Phi 1 Initial", "phi1Init", 0, 2*Math.PI, false, 1.5],
-	["Phi 2 Initial", "phi2Init", 0, 2*Math.PI, false, 2.5]];
+	["Phi 2 Initial", "phi2Init", 0, 2*Math.PI, false, 2.8]];
 
 slidersConsts.forEach((item, i)=>{
 	let slider = new Slider(...item);
