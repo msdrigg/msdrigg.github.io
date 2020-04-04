@@ -148,7 +148,6 @@ class DoublePendulumDemo {
 			return;
 		}
 		if (! this.continueLooping ) {
-			this.isReset = false;
 			this.continueLooping = true;
 			const demoContext = this;
 			requestAnimationFrame(()=>demoContext.updateDisplay());
@@ -156,19 +155,25 @@ class DoublePendulumDemo {
 	}
 
 	stop() {
-		if (this.continueLooping) this.continueLooping = false;
+		this.continueLooping = false;
 	}
 	
 	restart() {
 		this.stop();
+		this.initialCoords = this.getInitialCoords();
+		this.initialCoordsCart = convertToCoordinates(this.initialCoords, this.constants);
+		this.currentCoords = this.initialCoords.clone();
+		this.lastCoords = this.currentCoords.clone();
+		this.currentCartCoords = this.initialCoordsCart.slice();
+		this.trailCounter = 0
+		this.currentStep = 0;
+		
 		for (let i = 0; i < this.pendulumNumber; i++) {
 			this.trailPaths[i] = "M " + (this.initialCoordsCart[i][2]*this.windowSize).toPrecision(5) + " " + (this.initialCoordsCart[i][3]*this.windowSize).toPrecision(5) + " ";
 		}
-		this.currentCoords = this.initialCoords;
-		this.lastCoords = this.currentCoords.clone();
-		this.currentCartCoords = this.initialCoordsCart;
-		this.drawPendulumsAt(this.initialCoordsCart);
-		this.isReset = true;
+		
+		this.svg.selectAll("*").remove();
+		this.init();
 	}
 
 	getInitialCoords() {
@@ -269,21 +274,12 @@ class DoublePendulumDemo {
 		this.lastCartCoords = this.newCoords;
 	}
 
-	drawPendulumsAt(newCoords) {
-		this.svg.selectAll("*").remove();
-		this.initialCoords = this.getInitialCoords();
-		this.initialCoordsCart = convertToCoordinates(this.initialCoords, this.constants);
-		this.trailCounter = 0;
-		this.init();
-	}
-
 
 	updateDisplay() {
 		this.lastCoords = this.currentCoords.clone();
 		for (let i = 0; i < this.repeats; i++) {
-			this.currentCoords = RK4LA(derivativeLA, this.stepSize, this.currentTime, this.currentCoords, this.constants);
+			this.currentCoords = RK4LA(derivativeLA, this.stepSize, 0, this.currentCoords, this.constants);
 		}
-		this.currentTime += this.stepSize*this.repeats;
 		this.currentCartCoords = convertToCoordinates(this.currentCoords, this.constants);
 
 		this.dots1.data(this.currentCartCoords)

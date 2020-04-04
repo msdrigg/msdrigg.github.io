@@ -121,9 +121,14 @@ class Slider {
 		else {slider.setAttribute("step", 0.1);}
 		
 		slider.oninput = (d)=>{
+			demos.forEach ((demo) => {
+				if (demo.continueLooping) {
+					demo.stop.bind(demo)();
+				}
+			});
 			textHolder.innerHTML = this.name + ": " + '<span style="font-weight: bold">' +  d.target.value + "</span>";
 			demo4[this.parameter + "_"] = d.target.valueAsNumber;
-			demo4.restart.bind(demo4);
+			requestAnimationFrame(demo4.restart.bind(demo4));
 		};
 		fullDiv.appendChild(slider);
 		fullDiv.appendChild(textHolder);

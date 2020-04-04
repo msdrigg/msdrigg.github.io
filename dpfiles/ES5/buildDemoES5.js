@@ -109,7 +109,6 @@ var DoublePendulumDemo = /*#__PURE__*/function () {
       }
 
       if (!this.continueLooping) {
-        this.isReset = false;
         this.continueLooping = true;
         var demoContext = this;
         requestAnimationFrame(function () {
@@ -120,22 +119,26 @@ var DoublePendulumDemo = /*#__PURE__*/function () {
   }, {
     key: "stop",
     value: function stop() {
-      if (this.continueLooping) this.continueLooping = false;
+      this.continueLooping = false;
     }
   }, {
     key: "restart",
     value: function restart() {
       this.stop();
+      this.initialCoords = this.getInitialCoords();
+      this.initialCoordsCart = convertToCoordinates(this.initialCoords, this.constants);
+      this.currentCoords = this.initialCoords.clone();
+      this.lastCoords = this.currentCoords.clone();
+      this.currentCartCoords = this.initialCoordsCart.slice();
+      this.trailCounter = 0;
+      this.currentStep = 0;
 
       for (var i = 0; i < this.pendulumNumber; i++) {
         this.trailPaths[i] = "M " + (this.initialCoordsCart[i][2] * this.windowSize).toPrecision(5) + " " + (this.initialCoordsCart[i][3] * this.windowSize).toPrecision(5) + " ";
       }
 
-      this.currentCoords = this.initialCoords;
-      this.lastCoords = this.currentCoords.clone();
-      this.currentCartCoords = this.initialCoordsCart;
-      this.drawPendulumsAt(this.initialCoordsCart);
-      this.isReset = true;
+      this.svg.selectAll("*").remove();
+      this.init();
     }
   }, {
     key: "getInitialCoords",
@@ -213,15 +216,6 @@ var DoublePendulumDemo = /*#__PURE__*/function () {
       this.lastCartCoords = this.newCoords;
     }
   }, {
-    key: "drawPendulumsAt",
-    value: function drawPendulumsAt(newCoords) {
-      this.svg.selectAll("*").remove();
-      this.initialCoords = this.getInitialCoords();
-      this.initialCoordsCart = convertToCoordinates(this.initialCoords, this.constants);
-      this.trailCounter = 0;
-      this.init();
-    }
-  }, {
     key: "updateDisplay",
     value: function updateDisplay() {
       var _this2 = this;
@@ -229,10 +223,9 @@ var DoublePendulumDemo = /*#__PURE__*/function () {
       this.lastCoords = this.currentCoords.clone();
 
       for (var i = 0; i < this.repeats; i++) {
-        this.currentCoords = RK4LA(derivativeLA, this.stepSize, this.currentTime, this.currentCoords, this.constants);
+        this.currentCoords = RK4LA(derivativeLA, this.stepSize, 0, this.currentCoords, this.constants);
       }
 
-      this.currentTime += this.stepSize * this.repeats;
       this.currentCartCoords = convertToCoordinates(this.currentCoords, this.constants);
       this.dots1.data(this.currentCartCoords).attr("cx", function (d) {
         return d[0] * _this2.windowSize;
