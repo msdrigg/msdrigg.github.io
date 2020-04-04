@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+<head>
+	<link rel="apple-touch-icon" sizes="180x180" href="/favicon/apple-touch-icon.png">
+	<link rel="icon" type="image/png" sizes="32x32" href="/favicon/favicon-32x32.png">
+	<link rel="icon" type="image/png" sizes="16x16" href="/favicon/favicon-16x16.png">
+	<link rel="manifest" href="media/site.webmanifest">
+	<meta name="viewport" content="width=device-width">
+	<script src=".dpfiles/doublePendulumLAES5.js"></script>
+	<script src=".dpfiles/buildDemoES5.js"></script>
+	<script src="https://d3js.org/d3-selection.v1.min.js"></script>
+	<script src="https://d3js.org/d3-array.v2.min.js"></script>
+	<script src="https://d3js.org/d3-interpolate.v1.min.js"></script>
+	<script src="https://d3js.org/d3-color.v1.min.js"></script>
+	<script src="https://d3js.org/d3-scale-chromatic.v1.min.js"></script>
+	<script src="https://d3js.org/d3-format.v1.min.js"></script>
+	<script src="https://d3js.org/d3-scale.v3.min.js"></script>
+	<script src="https://d3js.org/d3-dispatch.v1.min.js"></script>
+	<script src="https://d3js.org/d3-interpolate.v1.min.js"></script>
+	<script src="https://d3js.org/d3-selection.v1.min.js"></script>
+	<script src="https://d3js.org/d3-path.v1.min.js"></script>
+	<script src="https://d3js.org/d3-shape.v1.min.js"></script>
+	<style>
+		html {
+		  background-color: black;
+		  color: white;
+		  font: 14px sans-serif;
+		  min-width: 250px;
+		}
+		.text-explanation {
+			text-align: left;
+		}
+		.title, .demoContainer, .centeredWrapper{
+		  text-align: center;
+		}
+		li {
+		  text-align: left;
+		}
+		h4 {
+		  font: bold;
+		  font-size: 20px;
+		  text-anchor: middle;
+		}
+		p {
+		  fill: #FFF;
+		  font: 14px sans-serif;
+		  text-anchor: middle;
+		  padding: 0px;
+		}
+		.footer p {
+		  float: bottom;
+		  font-size: 12px;
+		  padding-left: 36px;
+		  text-indent: -36px;
+		}
+		h5 {
+		  margin-block-end: .8em;
+		  font: bold;
+		  font-size: 16px;	
+		  margin-block-start: 3em;
+		}
+		.pendulumLine1, .pendulumLine2 {
+		  "stroke-width", 5;
+		}
+		.demoSubcaption {
+			font-size: 10px;
+			font-style: italic;
+			float: top;
+		}
+		.centeredWrapper {
+			text-align: center;
+			width: 100%;
+		}
+		svg {
+			max-width: 500px;
+			width: 100%;
+			height: auto;
+		}
+		.demoCaption {
+			user-select: none;
+			font-style: italic;
+			margin-bottom: 30px;
+		}
+		.mainContent {
+			max-width: 700px;
+			margin: auto;
+			min-width: 250px;
+		}
+		.mainContentWrapper{
+			text-align: center;
+		}
+		.works-cited {
+			padding-left: 22px;
+			text-indent: -22px;
+			text-align: left;
+		}
+		.demoController {
+			width: 100%;
+			box-sizing: border-box;
+			background-color: #CCC;
+			border-radius: 10px;
+			padding: 20px;
+			display: inline-flex;
+			justify-content: space-around;
+			flex-direction: row;
+			flex-wrap: nowrap;
+			color: #000;
+		}
+		.leftCol, .rightCol {
+			width: 40%;
+		}
+		.sliderWrapper {
+			margin-top: 15px;
+			martin-bottom: 15px;
+		}
+		.slider::-webkit-slider-thumb {
+		  -webkit-appearance: none;
+		  appearance: none;
+		  width: 25px;
+		  height: 25px;
+		  border-radius: 50%; 
+		  background: #000;
+		  cursor: pointer;
+		  margin-bottom: 8px;
+		}
+
+		.slider::-moz-range-thumb {
+		  width: 25px;
+		  height: 25px;
+		  border-radius: 50%;
+		  background: #4CAF50;
+		  cursor: pointer;
+		}
+		.slider {
+		  -webkit-appearance: none;
+		  width: 100%;
+		  height: 15px;
+		  border-radius: 5px;  
+		  background: #838383;
+		  outline: none;
+		  opacity: 0.7;
+		  -webkit-transition: .2s;
+		  transition: opacity .2s;
+		}
+	</style>
+</head>
+
+<body>
+<div class="mainContentWrapper">
+<div class="mainContent">
+<h4>
+  The Chaos of Double Pendulums
+</h4>
+<p class="text-explanation">
+	What is chaos? Chaos is seen a crowded room, a shattered glass and a uncontrollable dog. 
+	At its deepest level, chaos is disorder and unpredictability.
+</p>
+<p class="text-explanation">
+	In mathematics and physics, chaos means something very specific:
+	</p>
+	<ul>
+		<li>sensitive to starting conditions</li>
+		<li>nonrepeating </li>
+	</ul>
+<p class="text-explanation">
+	These two ideas mean that chaotic problems are impossible to solve exactly and difficult to solve approximately.
+	But they're very important problems to work on because chaos theory is the reason that things like the weather, the stock market
+	and fluid flow is so hard to predict. If we can get better at predicting hurricanes or stock market crashes, we can do a better job preparing for them.
+</p>
+<p class="text-explanation">
+	The atmosphere and the stock market are large systems with many moving parts, but we can find chaos in very simple systems.
+	Pendulums are the essense of regularity. They swing so consistently that they were used by Galileo to make the earliest reliable clock. 
+	In the diagram directly below, we add a second pendulum to the end of the first. This adds a slight disruption to the oscillation, but it still swings regularly.
+</p>
+<div id="demoSmall" class="demoContainer">
+</div>
+<p class="text-explanation">
+	If we increase the length of oscillation, the system takes a few swings, but it soons loses all regularity and becomes untrackable.
+	Below is a demonstration of how sensitive and unpredictable double pendulums are. This system starts out with 50 pendulums almost exactly ontop of each other.
+	Their bobs are just 0.03 degrees appart at the furthest (If you zoom into the image, you should be able to see the edges of 
+	the ones in the back). After just a few seconds, these pendulums split and take a totally unique path.
+</p>
+<div id="demoVanilla" class="demoContainer">
+</div>
+<p class="text-explanation">
+	There is a certain beauty to the chaos. The few moments of instability before
+	the bobs diverge is mesmerizing. In the demo below, the paths of the pendulums are plotted behind them.
+</p>
+<div id="demoTrails" class="demoContainer">
+</div>
+<p class="text-explanation">
+	Below I added a demonstration where you can play with some of the parameters.
+</p>
+<div id="demoPlayable" class="demoContainer">
+</div>
+<div class="centeredWrapper">
+<div id="controllerID" class="demoController">
+<div id="leftCol" class="leftCol">
+</div>
+<div id="rightCol" class="rightCol">
+</div>
+</div>
+<p class="text-explanation">
+	In this final demo, we can observer how difficult these problems are to solve even with the assistance of a computer. 
+	To process these simulations fast enough on a normal computer for you to see them, the solution loses much accuracy. This loss can be seen by making rod 
+	lengths significantly different. When one rod is much longer than the other, the errors become significant enough to notice 
+	with the naked eye. You can see the second pendulum dragging behind or lunging forward unnaturally.
+</p>
+<p class="text-explanation">
+	These errors can be reduced, but not without a lot of time or a larger computer.
+</p>
+</div>
+<div class="footer">
+  <h5 style="text-align: left">
+  Sources
+  </h5>
+  <p class="works-cited">
+  Assencio, Diego. &quotThe double pendulum: Hamiltonian formulation.&quot 17 May 2014. https://diego.assencio.com/?index=e5ac36fcb129ce95a61f8e8ce0572dbf. Accessed 31 Mar. 2020.
+  Taylor, John. <span style="font-style: italic"> Classical Mechanics </span>. University Science Books, 2005.
+</div>
+</div>
+<script src=".dpfiles/defaultScriptES5.js"> </script>
+</div>
+</body>
+</html>
