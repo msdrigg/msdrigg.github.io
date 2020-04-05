@@ -73,7 +73,8 @@ demos.forEach((demo)=>{
 		demoLocation.onclick = demo.restart.bind(demo);
 	}
 	else {
-		demoLocation.onclick = function (){
+		demoLocation.onclick = function (d){
+			if (d.target != event.currentTarget) return;
 			if (demo.continueLooping) {
 				demo.stop.bind(demo)();
 			}

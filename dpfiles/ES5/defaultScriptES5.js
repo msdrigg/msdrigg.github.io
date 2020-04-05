@@ -119,7 +119,8 @@ demos.forEach(function (demo) {
     demoLocation.onmouseleave = demo.stop.bind(demo);
     demoLocation.onclick = demo.restart.bind(demo);
   } else {
-    demoLocation.onclick = function () {
+    demoLocation.onclick = function (d) {
+	  if (d.currentTarget != d.target) return;
       if (demo.continueLooping) {
         demo.stop.bind(demo)();
       } else {
