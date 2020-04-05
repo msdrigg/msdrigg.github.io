@@ -5,9 +5,10 @@ class AnimationLock {
 	}
 	request() {
 		if (this.locked) {
-			return false;
+			return true;
 		}
 		this.locked = true;
+		return false;
 	}
 	release() {
 		this.locked = false;

@@ -41,7 +41,7 @@ var AnimationLock = /*#__PURE__*/function () {
     key: "request",
     value: function request() {
       if (this.locked) {
-        return false;
+        return true;
       }
 
       this.locked = true;
