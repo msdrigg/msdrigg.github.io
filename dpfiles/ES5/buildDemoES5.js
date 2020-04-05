@@ -104,11 +104,13 @@ var DoublePendulumDemo = /*#__PURE__*/function () {
   _createClass(DoublePendulumDemo, [{
     key: "start",
     value: function start() {
+	  console.log("Trying to start");
       if (this.lock.request()) {
         return;
       }
 
       if (!this.continueLooping) {
+	    console.log("Starting");
         this.continueLooping = true;
         var demoContext = this;
         requestAnimationFrame(function () {
@@ -119,6 +121,7 @@ var DoublePendulumDemo = /*#__PURE__*/function () {
   }, {
     key: "stop",
     value: function stop() {
+	  console.log("Stopping");
       this.continueLooping = false;
     }
   }, {
@@ -267,6 +270,7 @@ var DoublePendulumDemo = /*#__PURE__*/function () {
           return _this2.updateDisplay();
         });
       } else {
+		console.log("Releasing");
         this.lock.release();
       }
     }
