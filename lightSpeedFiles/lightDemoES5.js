@@ -125,7 +125,7 @@ d3.json("static/FastThings.json").then(function (data) {
     tooltip.transition().duration(500).style("opacity", 0);
   });
   objectNumber = data.length;
-  objects.append("image").attr("height", hsize).attr("y", function (d, i) {
+  objects.append("image").attr("height", hsize).attr("width", 500).attr("y", function (d, i) {
     return -hsize / 2 + scaleFactor * i - scaleFactor * objectNumber / 2;
   }).attr("href", function (d) {
     return "/static/" + d.image;
