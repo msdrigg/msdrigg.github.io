@@ -142,5 +142,5 @@ d3.json("static/FastThings.json").then( (data)=> {
 		.attr("transform", "translate("+0+"," + height + ")")
 		.call(xAxis);
 	updateGraph();
-	svg.on("wheel.zoom", motion).on("touchmove", motion);
+	svg.on("wheel.zoom", motion);
 });
