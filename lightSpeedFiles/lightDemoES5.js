@@ -46,23 +46,21 @@ function updateGraph() {
 }
 
 function motion() {
-  if (!d3.event.ctrlKey) {
-    var dx = d3.event.wheelDeltaX;
-    var dy = d3.event.wheelDeltaY;
-    var amount;
+	var dx = d3.event.wheelDeltaX;
+	var dy = d3.event.wheelDeltaY;
+	var amount;
 
-    if (Math.abs(dx) > Math.abs(dy)) {
-      amount = dx;
-    } else {
-      amount = dy;
-    }
+	if (Math.abs(dx) > Math.abs(dy)) {
+	  amount = dx;
+	} else {
+	  amount = dy;
+	}
 
-    currentTranslateX += amount;
-    currentTranslateX = Math.max(-490 * currentScale, currentTranslateX);
-    currentTranslateX = Math.min(40, currentTranslateX);
-    d3.event.preventDefault();
-    d3.event.stopPropagation();
-  }
+	currentTranslateX += amount;
+	currentTranslateX = Math.max(-490 * currentScale, currentTranslateX);
+	currentTranslateX = Math.min(40, currentTranslateX);
+	d3.event.preventDefault();
+	d3.event.stopPropagation();
 
   updateGraph();
 }

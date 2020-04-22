@@ -49,22 +49,20 @@ function updateGraph(){
 }
 
 function motion(){
-    if (!d3.event.ctrlKey) {
-		let dx = d3.event.wheelDeltaX;
-		let dy = d3.event.wheelDeltaY;
-		let amount;
-		if (Math.abs(dx) > Math.abs(dy)){
-			amount = dx;
-		}
-		else {
-			amount = dy;
-		}
-		currentTranslateX += amount;
-		currentTranslateX = Math.max(-490*currentScale, currentTranslateX);
-		currentTranslateX = Math.min(40, currentTranslateX);
-		d3.event.preventDefault();
-		d3.event.stopPropagation();
-    }
+	let dx = d3.event.wheelDeltaX;
+	let dy = d3.event.wheelDeltaY;
+	let amount;
+	if (Math.abs(dx) > Math.abs(dy)){
+		amount = dx;
+	}
+	else {
+		amount = dy;
+	}
+	currentTranslateX += amount;
+	currentTranslateX = Math.max(-490*currentScale, currentTranslateX);
+	currentTranslateX = Math.min(40, currentTranslateX);
+	d3.event.preventDefault();
+	d3.event.stopPropagation();
     updateGraph();
 }
 
@@ -144,5 +142,5 @@ d3.json("static/FastThings.json").then( (data)=> {
 		.attr("transform", "translate("+0+"," + height + ")")
 		.call(xAxis);
 	updateGraph();
-	svg.on("wheel.zoom", motion);
+	svg.on("wheel.zoom", motion).on("touchmove", motion);
 });
