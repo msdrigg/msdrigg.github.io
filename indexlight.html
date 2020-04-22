@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+<head>
+	<link rel="apple-touch-icon" sizes="180x180" href="/static/favicon/apple-touch-icon.png">
+	<link rel="icon" type="image/png" sizes="32x32" href="/static/favicon/favicon-32x32.png">
+	<link rel="icon" type="image/png" sizes="16x16" href="/static/favicon/favicon-16x16.png">
+	<link rel="manifest" href="/static/site.webmanifest">
+	<meta name="viewport" content="width=device-width">
+	
+	<script src="https://d3js.org/d3-selection.v1.min.js"></script>
+	<script src="https://d3js.org/d3-array.v2.min.js"></script>
+	<script src="https://d3js.org/d3-interpolate.v1.min.js"></script>
+	<script src="https://d3js.org/d3-color.v1.min.js"></script>
+	<script src="https://d3js.org/d3-scale-chromatic.v1.min.js"></script>
+	<script src="https://d3js.org/d3-format.v1.min.js"></script>
+	<script src="https://d3js.org/d3-scale.v3.min.js"></script>
+	<script src="https://d3js.org/d3-dispatch.v1.min.js"></script>
+	<script src="https://d3js.org/d3-interpolate.v1.min.js"></script>
+	<script src="https://d3js.org/d3-selection.v1.min.js"></script>
+	<script src="https://d3js.org/d3-path.v1.min.js"></script>
+	<script src="https://d3js.org/d3-shape.v1.min.js"></script>
+	<script src="https://d3js.org/d3-fetch.v1.min.js"></script>
+	<script src="https://d3js.org/d3-axis.v1.min.js"></script>
+	
+	<script src="https://d3js.org/d3-ease.v1.min.js"></script>
+	<script src="https://d3js.org/d3-timer.v1.min.js"></script>
+	<script src="https://d3js.org/d3-transition.v1.min.js"></script>
+	<script src="https://d3js.org/d3-drag.v1.min.js"></script>
+	<script src="https://d3js.org/d3-zoom.v1.min.js"></script>
+	<style>
+		html {
+		  overflow: none;
+		  overscroll-behavior: none;
+		  overscroll-behavior-y: none;
+		  overscroll-behavior-x: none;
+		  background-color: black;
+		  color: white;
+		  font: 14px sans-serif;
+		  min-width: 250px;
+		}
+		.text-explanation {
+			text-align: left;
+		}
+		.title, .demoContainer, .centeredWrapper{
+		  text-align: center;
+		}
+		h4 {
+		  font: bold;
+		  font-size: 20px;
+		  text-anchor: middle;
+		}
+		p {
+		  fill: #FFF;
+		  font: 14px sans-serif;
+		  text-anchor: middle;
+		  padding: 0px;
+		}
+		.footer p {
+		  float: bottom;
+		  font-size: 12px;
+		  padding-left: 36px;
+		  text-indent: -36px;
+		}
+		h5 {
+		  margin-block-end: .8em;
+		  font: bold;
+		  font-size: 16px;	
+		  margin-block-start: 3em;
+		}
+		.centeredWrapper {
+			text-align: center;
+			width: 100%;
+		}
+		svg {
+			min-width: 400px;
+			width: 100%;
+			max-height: 
+		}
+		.mainContent {
+			max-width: 700px;
+			margin: auto;
+			min-width: 250px;
+		}
+		.mainContentWrapper{
+			text-align: center;
+		}
+		.works-cited {
+			padding-left: 22px;
+			text-indent: -22px;
+			text-align: left;
+		}
+		.demoWrapperWrapper {
+			text-align: center;
+		}
+		.demoWrapper {
+			max-width: 500px;
+			width: 100%;
+			max-height: 500px;
+			display: inline-block;
+		}
+		.tick, .domain{	
+			font-size: 10px;
+		}
+		.demoController {
+			width: 100%;
+			box-sizing: border-box;
+			background-color: #CCC;
+			border-radius: 10px;
+			padding: 20px;
+			display: inline-flex;
+			justify-content: space-around;
+			flex-direction: row;
+			flex-wrap: nowrap;
+			color: #000;
+		}
+		div.tooltip {
+			position: absolute;			
+			text-align: left;			
+			width: 100px;
+			color: #000;
+			height: auto;					
+			padding: 10px;				
+			font: 10px sans-serif;		
+			background: white;	
+			border: 0px;		
+			border-radius: 8px;			
+			pointer-events: none;			
+		}
+	</style>
+</head>
+
+<body>
+<div class="mainContentWrapper">
+<div class="mainContent">
+<h4>
+  The Speed of Light
+</h4>
+<p class="text-explanation">
+	Light is the fastest thing in the universe, but how fast is it really? Scroll through the demo below to see how how fast it really is.
+</p>
+<div class="demoWrapperWrapper">
+<div class="demoWrapper">
+
+</div>
+</div>
+<div class="footer">
+  <h5 style="text-align: left">
+  Sources
+  </h5>
+  <p class="works-cited">
+  &quotSpeed Orders of Magnitude&quot. <span style="font-style: italic">Wikipedia</span>. Wikipedia Foundation, 2020, en.wikipedia.org/wiki/Orders_of_magnitude_(speed). Accessed 14 Apr. 2020.
+  </p>
+</div>
+</div>
+<script src="lightSpeedFiles/lightDemoES5.js">
+</script>
+
+</div>
+</body>
+</html>

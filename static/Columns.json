@@ -1,0 +1,26 @@
+{
+	"columns": 
+	[
+		"bamboo", "cheetah", "car", "freefall", "sound", 
+		"apollo", "juno", "solar system", "lead lightening", 
+		"milky way", "neutron", "cathode ray", "return lightening", 
+		"fiber optics", "collider", "oh my god", "light"
+	]
+	"bamboo": {"name": "Bamboo", "speed": 10E-5, "description": "Bamboo is the worlds fastest growing plant", "image": "bamboo.jpg"},
+	"cheetah": {"name": "Cheetah", "speed": 30, "description": "The Cheetah is the fastest land animal", "image": "cheetah.jpg"},
+	"car": {"name": "Koenigsegg Agera RS", "speed": 124.2, "description": "The Koenigsegg Agera is the fastest production car",  "image": "koenigsegg.jpg"},
+	"freefall": {"name": "Freefall", "speed": 373, "description": "Humans typically fall 6 times slower but this is the speed record for human free-fall", "image": "freefall.jpg"},
+	"sound": {"name": "Sound", "speed": 1500, "description": "Sound travels nearly 4 times faster in water than in air",  "image": "sound.jpg"},
+	"apollo": {"name": "Apollo 10", "speed": 11107, "description": "Apollo 10 was the fastest human-crewed vehical", "image": "apollo.png"},
+	"juno": {"name": "Juno Spacecraft", "speed": 73800, "description": "The Juno probe to Jupiter was the fastest man-made technical object", "image": "juno.jpg"},
+	"solar system": {"name": "Solar System", "speed": 200000, "description": "The solar system orbits at this speed through the Milky Way Galaxy", "image": "solarSystem.jpg"},
+	"lead lightening": {"name": "The Lead Stroke of Lightening", "speed": 440000, "description": "The leading stroke of a lightening bolt often branches into many smaller strokes", "image": "leadLightening.jpg"},
+	"milky way": {"name": "Milky Way", "speed": 552000, "description": "The Milky Way Galaxy moves at this speed relative to the rest of the universe", "image": "milkyWay.jpg"},
+	"neutron": {"name": "Fast Neutron", "speed": 14000000, "description": "Fast neutrons are produced in nuclear bombs", "image": "neutron.jpg"},
+	"cathode ray": {"name": "Electron in a Cathode Ray Tube", "speed": 30000000, "description": "Cathode ray tubes are found in old TVs and computer monitors", "image": "cathodeRay.jpg"},
+	"return lightening": {"name": "The Return Stroke of Lightening", "speed": 100000000, "description": "The return stroke of a lightening bolt is brighter and faster than the leading stroke", "image": "returnLightening.jpg"},
+	"fiber optics": {"name": "Fiber Optics", "speed": 200000000, "description": "Signals in a fiber optic cable offer the fastest earth-bound communication", "image": "fiberOptics.jpg"},
+	"collider": {"name": "Large Hadron Collider", "speed": 299792456, "description": "Protons in the large hadron collider are the fastest things artifically-powered objects", "image": "collider.jpg"},
+	"oh my god": {"name": "Oh-My-God Particle", "speed": 299792457.999999999999999, "description": "Fastest cosmic ray every measured in its time", "image": "cosmicRay.jpg"},
+	"light": {"name": "Light", "speed": 299792485, "description": "Light in free space is the fastest thing in the universe", "image": "light.jpg"}
+}
