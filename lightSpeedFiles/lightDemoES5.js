@@ -31,6 +31,7 @@ var imageRatios;
 var hsize = 80;
 var scaleFactor = 12;
 var objectNumber;
+var alreadyLoaded = false;
 var svg = d3.select(".demoWrapper").append("svg").attr("viewBox", "0 0 " + (width + margin.left + margin.right) + " " + (height + margin.top + margin.bottom)).attr("width", "100%");
 canvas = svg.append("g").attr("id", "canvas").attr("width", width).attr("height", height).attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 var tooltip = d3.select(".mainContent").append("div").attr("class", "tooltip").style("opacity", 0);
@@ -69,18 +70,25 @@ function motion() {
 function updateRectanglesIfComplete() {
   var proceed = true;
 
-  for (var i = 0; i < dataContainer.length; i = i + 1) {
+  for (var i = 0; i < dataContainer.length; i++) {
     proceed = proceed && imageRatios[dataContainer[i].name] != null;
   }
 
   if (proceed) {
+    if (alreadyLoaded) return;
+    alreadyLoaded = true;
     objects.append("rect").attr("height", hsize).attr("width", function (d) {
       return imageRatios[d.name] * hsize;
-    }).attr("fill", "white").attr("stroke", "white").style("stroke", "white").style("stroke-width", 2).attr("y", function (d, i) {
+    }).attr("stroke", "white").style("stroke-width", 2).attr("y", function (d, i) {
+      return -hsize / 2 + scaleFactor * i - scaleFactor * objectNumber / 2;
+    });
+    objects.append("image").attr("height", hsize).attr("width", function (d) {
+      return imageRatios[d.name] * hsize;
+    }).attr("y", function (d, i) {
       return -hsize / 2 + scaleFactor * i - scaleFactor * objectNumber / 2;
     }).attr("href", function (d) {
       return "/static/" + d.image;
-    }).lower();
+    });
   } else {
     console.log("Warning, not everything loaded");
     setTimeout(updateRectanglesIfComplete, 1000);
@@ -118,18 +126,13 @@ d3.json("static/FastThings.json").then(function (data) {
     return "translate(" + x(d.speed) + "," + height / 2 + ")";
   }).on("mouseover", function (d) {
     var sel = d3.select(this).raise();
-    var tooltipText = "<span style=\"font-weight: bold; font-size: 12px\">" + d.name + "</span><br/>" + d.speed + " mph" + "</br>" + d.description;
+    var tooltipText = "<span style=\"font-weight: bold; font-size: 12px\">" + d.name + "</span><br/>" + "<span style=\"font-style: italic\">" + d.speed + "</span>" + " mph" + "</br>" + d.description;
     tooltip.transition().duration(200).style("opacity", .9);
     tooltip.html(tooltipText).style("left", d3.event.pageX + "px").style("top", d3.event.pageY - 28 + "px");
   }).on("mouseout", function (d) {
     tooltip.transition().duration(500).style("opacity", 0);
   });
   objectNumber = data.length;
-  objects.append("image").attr("height", hsize).attr("width", 500).attr("y", function (d, i) {
-    return -hsize / 2 + scaleFactor * i - scaleFactor * objectNumber / 2;
-  }).attr("href", function (d) {
-    return "/static/" + d.image;
-  });
   gX = canvas.append("g").attr("class", "axis axis-x").attr("transform", "translate(" + 0 + "," + height + ")").call(xAxis);
   updateGraph();
   svg.on("wheel.zoom", motion);

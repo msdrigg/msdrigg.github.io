@@ -24,6 +24,7 @@ let imageRatios;
 let hsize = 80;
 let scaleFactor = 12;
 let objectNumber;
+let alreadyLoaded = false;
 
 let svg = d3.select(".demoWrapper")
 			.append("svg")
@@ -73,17 +74,23 @@ function updateRectanglesIfComplete() {
 		proceed = proceed && (imageRatios[dataContainer[i].name] != null);
 	}
 	if (proceed) {
+		if (alreadyLoaded) return;
+		alreadyLoaded = true;
+		
 		objects
 			.append("rect")
 			.attr("height", hsize)
 			.attr("width", function(d) {return imageRatios[d.name]* hsize;})
-			.attr("fill", "white")
 			.attr("stroke", "white")
-			.style("stroke", "white")
 			.style("stroke-width", 2)
+			.attr("y", function(d, i){return -hsize/2 + scaleFactor*i - scaleFactor*objectNumber/2;});
+			
+		objects
+			.append("image")
+			.attr("height", hsize)
+			.attr("width", function(d) {return imageRatios[d.name]* hsize;})
 			.attr("y", function(d, i){return -hsize/2 + scaleFactor*i - scaleFactor*objectNumber/2;})
-			.attr("href", (d)=>{return "/static/" + d.image;})
-			.lower();
+			.attr("href", (d)=>{return "/static/" + d.image;});
 	}
 	else {
 		console.log("Warning, not everything loaded");
@@ -115,7 +122,7 @@ d3.json("static/FastThings.json").then( (data)=> {
 		.attr("transform", (d)=>{return "translate("+x(d.speed)+","+height/2+")";})
 		.on("mouseover", function (d) {
 			let sel = d3.select(this).raise();
-			let tooltipText = "<span style=\"font-weight: bold; font-size: 12px\">" + d.name + "</span><br/>"  + d.speed  + " mph" + "</br>" + d.description;
+			let tooltipText = "<span style=\"font-weight: bold; font-size: 12px\">" + d.name + "</span><br/>"  + "<span style=\"font-style: italic\">" + d.speed  +"</span>" + " mph" + "</br>" + d.description;
 			tooltip.transition()		
 				.duration(200)		
 				.style("opacity", .9);		
@@ -129,12 +136,6 @@ d3.json("static/FastThings.json").then( (data)=> {
 				.style("opacity", 0);});
 	
 	objectNumber = data.length;
-	
-	objects
-		.append("image")
-		.attr("height", hsize)
-		.attr("y", function(d, i){return -hsize/2 + scaleFactor*i - scaleFactor*objectNumber/2;})
-		.attr("href", (d)=>{return "/static/" + d.image;});
 	
 
 	
